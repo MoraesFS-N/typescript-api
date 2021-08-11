@@ -5,12 +5,16 @@
   "repository": "https://github.com/MoraesFS-N/typescript-api.git",
   "author": "moraes.neto <moraesfelicioneto@hotmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+  },
   "dependencies": {
     "@types/express": "^4.17.13",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "eslint": "^7.31.0",
+    "eslint": "^7.32.0",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   }
 }
