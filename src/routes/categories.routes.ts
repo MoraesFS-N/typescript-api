@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { CategoriesRepository } from "../repositories/CategoryRespository";
+import { CategoriesRepository } from "../modules/cars/repositories/CategoryRespository";
+import { CreateCategoryService } from "../services/CreateCategoryService";
 
 const categoriesRoutes = Router();
 const categoriesRepository = new CategoriesRepository();
@@ -8,13 +9,9 @@ categoriesRoutes.post("/", (request, response) => {
 
     const { name, description } = request.body;
 
-    const categoryAlreadyExists = categoriesRepository.findByName(name);
+    const createCategoryService = new CreateCategoryService(categoriesRepository);
 
-    if (categoryAlreadyExists) {
-        return response.status(400).json({error: 'Categoria já existente'});
-    }
-     
-    categoriesRepository.create({name, description});
+    createCategoryService.execute({name: name, description: description})
 
     return response.status(201).send({message: 'Categoria adicionada com sucesso.'});
 });
@@ -22,7 +19,7 @@ categoriesRoutes.post("/", (request, response) => {
 
 categoriesRoutes.get("/", (request, response) => {
 
-    const allCategories = categoriesRepository.listCategories();
+    const allCategories = categoriesRepository.list();
 
     return response.status(200).json(allCategories); 
 });

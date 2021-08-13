@@ -1,19 +1,17 @@
 import { Category } from "../model/Category";
+import { ICategoriesRepository, ICreateCategoryDTO } from "./ICategoriesRepository";
 
-interface ICreateCategoryDTO{
-    name: string;
-    description: string;
-}
 
-class CategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository{
     
     private categories: Category[];
 
     constructor(){
         this.categories = [];
     }
+   
 
-    create({ description, name } : ICreateCategoryDTO): void{
+    create({ description, name  } : ICreateCategoryDTO) {
 
         const category = new Category();
         const created_at = new Date();
@@ -27,8 +25,7 @@ class CategoriesRepository {
         this.categories.push(category);
     }
 
-    listCategories(): Category[]{
-
+    list(): Category[] {
         return this.categories;
     }
 
