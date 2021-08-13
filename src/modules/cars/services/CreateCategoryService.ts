@@ -1,4 +1,4 @@
-import { CategoriesRepository } from "../modules/cars/repositories/CategoryRespository";
+import { CategoriesRepository } from "../repositories/CategoryRespository";
 
 interface IRequest {
     name: string;
